@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>양승범 — IT Infra · M365 운영 엔지니어</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F5F9; --panel:#FFFFFF; --ink:#16324F; --body:#3A4657;
+  --line:#D9E2EE; --blue:#2D6CDF; --green:#2FA36B; --amber:#E8A33D;
+  --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans KR','Malgun Gothic',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--body);font-family:var(--sans);line-height:1.7;font-size:16px}
+a{color:var(--blue);text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+
+/* ── top status bar ── */
+.topbar{background:var(--ink);color:#C8D6E8;font-family:var(--mono);font-size:12px;padding:9px 0}
+.topbar .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:7px;vertical-align:1px;animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none}.reveal{opacity:1!important;transform:none!important}}
+
+/* ── hero: status board ── */
+.hero{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:13px;color:var(--blue);letter-spacing:.14em;margin-bottom:14px}
+h1{font-size:clamp(30px,5.4vw,52px);color:var(--ink);font-weight:700;letter-spacing:-.02em;line-height:1.25;margin-bottom:16px}
+h1 .hl{color:var(--blue)}
+.lede{max-width:640px;font-size:17px;margin-bottom:34px}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.stat .k{font-family:var(--mono);font-size:11px;color:#7B8AA0;letter-spacing:.08em;text-transform:uppercase}
+.stat .v{font-size:26px;font-weight:700;color:var(--ink);margin-top:4px}
+.stat .v small{font-size:14px;color:#7B8AA0;font-weight:500}
+@media(max-width:760px){.board{grid-template-columns:repeat(2,1fr)}}
+
+/* ── sections ── */
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+h2{font-size:22px;color:var(--ink);font-weight:700;margin-bottom:6px}
+.sec-id{font-family:var(--mono);font-size:12px;color:var(--blue);margin-bottom:6px;letter-spacing:.1em}
+.sec-sub{font-size:15px;color:#68788E;margin-bottom:30px;max-width:620px}
+
+/* ── match matrix ── */
+.match{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14.5px}
+.match th{background:#E9EFF7;color:var(--ink);font-size:13px;text-align:left;padding:11px 16px;font-family:var(--mono);letter-spacing:.04em}
+.match td{padding:13px 16px;border-top:1px solid var(--line);vertical-align:top}
+.badge{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.ok{background:#E4F3EC;color:#1E7A4E}.mid{background:#FBF0DC;color:#9A6A12}
+
+/* ── career log ── */
+.log{background:var(--ink);border-radius:12px;padding:8px 0;font-family:var(--mono)}
+.entry{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:22px 26px;border-bottom:1px solid rgba(255,255,255,.08)}
+.entry:last-child{border-bottom:none}
+.entry .when{color:#7FA3D4;font-size:12.5px;line-height:1.9}
+.entry .when .len{color:#51698C;display:block;font-size:11px}
+.entry h3{color:#F2F6FB;font-family:var(--sans);font-size:17px;font-weight:600;margin-bottom:3px}
+.entry .role{color:#8FB4E4;font-size:12px;margin-bottom:10px}
+.entry ul{list-style:none;font-family:var(--sans)}
+.entry li{color:#C4D2E4;font-size:14px;padding-left:16px;position:relative;margin-bottom:5px;line-height:1.65}
+.entry li::before{content:"›";position:absolute;left:0;color:var(--blue)}
+.entry .note{font-size:12.5px;color:#8296AF;font-family:var(--sans);margin-top:10px;padding:9px 12px;background:rgba(255,255,255,.05);border-left:2px solid var(--amber);border-radius:0 6px 6px 0}
+.tag-anchor{display:inline-block;font-size:10px;background:var(--blue);color:#fff;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:2px;letter-spacing:.06em}
+@media(max-width:640px){.entry{grid-template-columns:1fr;gap:6px}}
+
+/* ── projects ── */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px}
+.card .pid{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.1em;margin-bottom:8px}
+.card h3{font-size:16.5px;color:var(--ink);margin-bottom:8px}
+.card p{font-size:14px;margin-bottom:12px}
+.card .impact{font-size:13px;color:var(--green);font-weight:600}
+.chips{margin-top:12px}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;background:#EAF0F9;color:#3E5A85;padding:3px 9px;border-radius:4px;margin:0 5px 5px 0}
+@media(max-width:700px){.cards{grid-template-columns:1fr}}
+
+/* ── stack ── */
+.stack-group{margin-bottom:18px}
+.stack-group .g{font-family:var(--mono);font-size:12px;color:var(--ink);font-weight:600;letter-spacing:.06em;margin-bottom:8px}
+
+/* ── footer ── */
+footer{padding:50px 0 70px}
+footer .cta{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:34px;text-align:center}
+footer h2{margin-bottom:10px}
+footer .contact{font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:14px;line-height:2}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <span><span class="dot"></span>STATUS: OPERATIONAL — 5Y 7M UPTIME</span>
+  <span>YANG SEUNGBEOM · IT INFRA / M365 OPS</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">INFRA OPERATIONS CONSOLE — PORTFOLIO</div>
+  <h1>보이지 않을 때 가장 잘 돌아가는 것,<br>저는 <span class="hl">그 인프라를 운영합니다</span></h1>
+  <p class="lede">제약 · 엔터테인먼트 · 제조 환경에서 M365와 Entra ID, 네트워크·보안·자산까지 전사 IT를 하나의 흐름으로 운영해 온 엔지니어 양승범입니다. 반복 운영을 코드로 바꾸고, 정책을 설명 가능한 상태로 만듭니다.</p>
+  <div class="board">
+    <div class="stat"><div class="k">Ops Experience</div><div class="v">5.6<small> 년</small></div></div>
+    <div class="stat"><div class="k">Managed Users</div><div class="v">800<small>+ 명 · 전 계열사</small></div></div>
+    <div class="stat"><div class="k">Tickets Resolved</div><div class="v">1,000<small>+ 건</small></div></div>
+    <div class="stat"><div class="k">Automations Built</div><div class="v">GAS·PS<small> · Python</small></div></div>
+  </div>
+</div></header>
+
+<section class="reveal"><div class="wrap">
+  <div class="sec-id">01 — JOB FIT</div>
+  <h2>공고 요건 매칭 현황</h2>
+  <p class="sec-sub">M365 및 Azure Cloud 운영/관리 · 데이터 거버넌스 · SharePoint/PowerPlatform 직무 기준.</p>
+  <table class="match">
+    <tr><th>REQUIREMENT</th><th>MY RECORD</th><th>STATE</th></tr>
+    <tr><td>M365 운영 경험<br>(Entra ID, Azure, Admin Center)</td><td>온프레미스 AD Azure 연동으로 M365 <b>전사 도입 프로젝트를 직접 수행</b>. Admin Center 기반 계정·라이선스·메일·그룹 정책을 800명 규모로 운영.</td><td><span class="badge ok">READY</span></td></tr>
+    <tr><td>M365 데이터관리 · 거버넌스</td><td>DLP/DRM 문서중앙화, NAC 접근제어, RBAC 준용 권한 체계, 입·퇴사 프로비저닝 표준화 — 데이터 접근 통제를 5년간 실무 운영.</td><td><span class="badge ok">READY</span></td></tr>
+    <tr><td>업무 혁신 개발 (PowerPlatform)</td><td>Apps Script·PowerShell로 입퇴사 자동메일, 라이선스 자동 점검 구축. ERP 연계 모바일 앱 단독 개발. <b>도구 전환만 필요한 상태.</b></td><td><span class="badge ok">TRANSFERABLE</span></td></tr>
+    <tr><td>SharePoint 포털/프로세스 개발</td><td>M365 스택 운영 이해 + HTML 사내 포털 제작 + Vue.js 웹 개발 경험 기반으로 학습 진행 중. 입사 후 90일 내 실무 투입 목표.</td><td><span class="badge mid">RAMPING</span></td></tr>
+    <tr><td>관련 경력 3년 이상 · 학사</td><td>IT 인프라 경력 약 5년 7개월 · 컴퓨터공학 학사.</td><td><span class="badge ok">READY</span></td></tr>
+  </table>
+</div></section>
+
+<section class="reveal"><div class="wrap">
+  <div class="sec-id">02 — CAREER LOG</div>
+  <h2>경력 로그</h2>
+  <p class="sec-sub">최신순. 커리어의 앵커는 에이프로젠제약 5년 4개월이며, 이후 두 번의 짧은 재직 사유는 각 항목에 투명하게 기록했습니다.</p>
+  <div class="log">
+    <div class="entry">
+      <div class="when">2026.03 —<br>재직중<span class="len">HYUNJIN SPORTEC</span></div>
+      <div>
+        <h3>현진스포텍 · 전산팀</h3>
+        <div class="role">전사 IT 단독 운영 / 대리</div>
+        <ul>
+          <li>GWS·ERP·방화벽·NAS·VPN 등 전사 인프라를 실무자 단독 총괄</li>
+          <li>SW 라이선스 전수 정리로 구독 비용 절감, IT 온보딩 프로세스 재설계</li>
+          <li>HTML 사내 안내 포털 제작, 생성형 AI 업무 적용 검토</li>
+        </ul>
+        <div class="note">이직 사유 — 협의 범위를 넘어 회사 정책·거버넌스 수립까지 단독 요구되는 구조. 체계적 조직에서 M365 전문성을 확정하기 위한 이동.</div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2025.07 —<br>2025.11<span class="len">JYP ENT. · 5MO</span></div>
+      <div>
+        <h3>JYP엔터테인먼트 · IT LAB</h3>
+        <div class="role">IT Support Engineer (SE)</div>
+        <ul>
+          <li>입·퇴사자 자동 메일 발신 시스템 구축 (Apps Script)</li>
+          <li>계정·라이선스 불일치 자동 점검 시스템 구현</li>
+          <li>Cisco WLC·RADIUS 무선 인증 운영, 백본 EOS 대응 검토</li>
+        </ul>
+        <div class="note">퇴사 사유 — 가정사로 인한 불가피한 퇴사. 현재 완전히 해결되어 장기 근속에 제약 없음.</div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2020.04 —<br>2025.07<span class="len">APROGEN · 5Y 4M</span></div>
+      <div>
+        <h3>에이프로젠제약(넥스코닉스) · 정보전략실 <span class="tag-anchor">ANCHOR</span></h3>
+        <div class="role">IT운영인프라 / 대리</div>
+        <ul>
+          <li>AD Azure 하이브리드 연동으로 <b>M365 전사 도입</b> — 계정 동기화·라이선스·메일 정책 설계</li>
+          <li>DLP/DRM·NAC 기반 데이터 보호 거버넌스를 800명 전 계열사에 정착</li>
+          <li>랜섬웨어 사고 초동대응 → 복구 → 재발방지 정책까지 전 과정 수행</li>
+          <li>VLAN·폐쇄망 설계, FortiGate 정책 운영, IDC 이전 프로젝트</li>
+          <li>ERP 자산관리 Android 앱 단독 개발, MX/SPF 메일 인프라 구축</li>
+        </ul>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2018.03 —<br>2019.11<span class="len">VIEWORKS · 1Y 8M</span></div>
+      <div>
+        <h3>머신비전 개발/해외 CS (무관이력)</h3>
+        <div class="role">SW 개발 및 해외 기술지원</div>
+        <ul>
+          <li>Vue.js 기반 검사결과 리뷰 웹 프로그램 단독 설계·개발</li>
+          <li>미국·폴란드·중국 현지 설치·교육·장애 대응</li>
+          <li>연 8대+ 수주 기여, 억 단위 매출 창출</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="reveal"><div class="wrap">
+  <div class="sec-id">03 — KEY PROJECTS</div>
+  <h2>대표 프로젝트</h2>
+  <p class="sec-sub">"사람이 하던 운영을 코드와 정책으로" — 실무에 정착된 것만 기록했습니다.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="pid">PRJ-01 · APROGEN</div>
+      <h3>AD–Azure 기반 M365 전사 도입</h3>
+      <p>온프레미스 AD와 Azure AD를 연동해 계정 동기화 구조를 설계하고, Exchange Online 전환·라이선스 정책·MX/SPF 메일 인프라까지 도입 전 구간 수행.</p>
+      <div class="impact">▲ 800명 전 계열사 협업 환경 전환, 운영 표준 확립</div>
+      <div class="chips"><span class="chip">Entra ID</span><span class="chip">M365 Admin</span><span class="chip">Exchange Online</span><span class="chip">AD/GPO</span></div>
+    </div>
+    <div class="card">
+      <div class="pid">PRJ-02 · JYP</div>
+      <h3>입·퇴사 자동 메일 & 라이선스 자동 점검</h3>
+      <p>Apps Script로 입퇴사 프로세스 메일을 자동 발신하고, 계정–라이선스 불일치를 자동 탐지하는 점검 시스템을 구현.</p>
+      <div class="impact">▲ 반복 업무 제거 · 라이선스 운영 리스크 감소</div>
+      <div class="chips"><span class="chip">Apps Script</span><span class="chip">GWS Admin</span><span class="chip">자동화</span></div>
+    </div>
+    <div class="card">
+      <div class="pid">PRJ-03 · APROGEN</div>
+      <h3>랜섬웨어 사고 대응 및 재발 방지 체계</h3>
+      <p>실제 감염 사고의 초동 대응·확산 차단·복구를 수행하고, 백업·격리·사용자 교육을 포함한 재발 방지 프로세스를 수립.</p>
+      <div class="impact">▲ 복구 완료 · 사전 대응 체계 정착</div>
+      <div class="chips"><span class="chip">보안사고 대응</span><span class="chip">백업 정책</span><span class="chip">DLP/DRM</span></div>
+    </div>
+    <div class="card">
+      <div class="pid">PRJ-04 · APROGEN</div>
+      <h3>ERP 연계 자산관리 모바일 앱 단독 개발</h3>
+      <p>사내 ERP 자산 파트를 Android 앱으로 단독 기획·개발. RESTful API, QR 스캔, 싱글톤 패턴 적용.</p>
+      <div class="impact">▲ 총무팀 자산 처리 시간 단축, 실사용 정착</div>
+      <div class="chips"><span class="chip">Android</span><span class="chip">REST API</span><span class="chip">Java</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="reveal"><div class="wrap">
+  <div class="sec-id">04 — STACK</div>
+  <h2>기술 스택</h2>
+  <p class="sec-sub"></p>
+  <div class="stack-group"><div class="g">M365 / CLOUD</div>
+    <span class="chip">M365 Admin Center</span><span class="chip">Entra ID (Azure AD)</span><span class="chip">Exchange Online</span><span class="chip">Google Workspace</span><span class="chip">MX/SPF</span><span class="chip">AWS (학습중·Summit/Immersion)</span></div>
+  <div class="stack-group"><div class="g">SERVER / DIRECTORY</div>
+    <span class="chip">Windows Server</span><span class="chip">Active Directory · GPO · LDAP · DNS</span><span class="chip">Linux (CentOS)</span><span class="chip">Tomcat · Redmine</span><span class="chip">VMware</span><span class="chip">Synology NAS</span></div>
+  <div class="stack-group"><div class="g">NETWORK / SECURITY</div>
+    <span class="chip">FortiGate</span><span class="chip">Cisco L3 · WLC · RADIUS</span><span class="chip">VLAN 설계</span><span class="chip">SSL-VPN</span><span class="chip">DLP/DRM</span><span class="chip">NAC</span><span class="chip">IDC 운영</span></div>
+  <div class="stack-group"><div class="g">DEV / AUTOMATION</div>
+    <span class="chip">Google Apps Script</span><span class="chip">PowerShell</span><span class="chip">Python</span><span class="chip">Java · Android</span><span class="chip">Vue.js</span><span class="chip">HTML/CSS/JS</span><span class="chip">MySQL · MariaDB · PostgreSQL</span></div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="cta">
+
+    <h2>운영은 신뢰로 완성됩니다</h2>
+    <div class="contact">
+      didtmdqja47@naver.com<br>
+      010-9962-1729 · 양승범
+    </div>
+  </div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
